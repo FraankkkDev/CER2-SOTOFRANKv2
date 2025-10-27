@@ -12,7 +12,7 @@
         <div class="card shadow-sm mb-4">
             <div class="card-body">
                 <h5 class="card-title">Información del Evento</h5>
-                <p><strong>Fecha y Hora:</strong> {{ event.tiempo|date:"l, d de F de Y, H:i" }}</p>
+                <p><strong>Fecha y Hora:</strong> {{event.tiempo}}</p>
                 <p><strong>Lugar:</strong> {{ event.lugar }}</p>
                 <p><strong>Valor:</strong> {{ event.get_valor_clp }}</p>
                 <p><strong>Plazas Disponibles:</strong> {{ event.plazas_disponibles }} de {{ event.plazas_totales }}</p>
