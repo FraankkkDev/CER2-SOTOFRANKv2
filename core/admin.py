@@ -56,7 +56,7 @@ class EventoAdmin(admin.ModelAdmin):
             obj.plazas_disponibles = obj.plazas_totales
         super().save_model(request, obj, form, change)
 
-@admin.register(Registro)
+
 class RegistroAdmin(admin.ModelAdmin):
     list_display = ('evento', 'usuario', 'fecha_registro')
     list_filter = ('evento', 'fecha_registro')
