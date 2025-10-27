@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'event_list' %}">Smart Events</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -68,14 +68,6 @@
         {% block content %}
         {% endblock content %}
     </div>
-    <footer class="footer mt-5 py-3 bg-dark fixed-bottom">
-        <div class="container text-center">
-            <span class="text-white-50">
-                Smart Events | EIN082B Taller Lenguaje de Programación
-                <span class="d-none d-sm-inline">| Universidad Técnica Federico Santa María</span>
-            </span>
-        </div>
-    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
