@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Listado de Eventos{% endblock %}
+{% block content %}
+<h1 class="mb-4">Próximos Eventos de Smart Events</h1>
+<div class="row">
+    {% for event in events %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            {% if event.imagen %}
+                <img src="{{ event.imagen.url }}" class="card-img-top" alt="{{ event.titulo }}" style="height: 200px; object-fit: cover;">
+            {% else %}
+                <div class="bg-light text-center p-5 border-bottom" style="height: 200px;">
+                    <p class="text-muted">Sin imagen</p>
+                </div>
+            {% endif %}
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ event.titulo }}</h5>
+                <p class="card-text">
+                    <strong>Valor:</strong> {{ event.get_valor_clp }}<br>
+                    <strong>Fecha:</strong> {{ event.tiempo|date:"d M Y H:i" }}<br>
+                    <strong>Lugar:</strong> {{ event.lugar }}
+                </p>
+                <div class="mt-auto">
+                    <a href="{% url 'event_detail' event.pk %}" class="btn btn-primary w-100">Ver Detalles</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="alert alert-info">No hay eventos publicados por el momento.</p>
+    {% endfor %}
+</div>
+{% endblock content %}

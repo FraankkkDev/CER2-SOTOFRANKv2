@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Mis Eventos Inscritos{% endblock %}
+{% block content %}
+<h1 class="mb-4">Mis Eventos (Inscripciones)</h1>
+
+{% if registrations %}
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Evento</th>
+                <th>Fecha y Hora</th>
+                <th>Lugar</th>
+                <th>Valor</th>
+                <th>Fecha de Inscripción</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for registration in registrations %}
+            <tr>
+                <td><a href="{% url 'event_detail' registration.evento.pk %}">{{ registration.evento.titulo }}</a></td>
+                <td>{{ registration.evento.tiempo|date:"d M Y H:i" }}</td>
+                <td>{{ registration.evento.lugar }}</td>
+                <td>{{ registration.evento.get_valor_clp }}</td>
+                <td>{{ registration.fecha_registro|date:"d M Y" }}</td>
+                <td>
+                    <a href="{% url 'unregister_event' registration.pk %}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres anular tu registro para este evento?');">Anular Registro</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p class="alert alert-warning">Aún no te has inscrito en ningún evento.</p>
+<a href="{% url 'event_list' %}" class="btn btn-primary">Ver Eventos Disponibles</a>
+{% endif %}
+{% endblock content %}

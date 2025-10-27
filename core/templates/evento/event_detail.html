@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{{ event.title }}{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-8">
+        <h1 class="mb-3">{{ event.titulo }}</h1>
+        
+        {% if event.imagen %}
+            <img src="{{ event.imagen.url }}" class="img-fluid rounded mb-4" alt="{{ event.titulo }}">
+        {% endif %}
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Información del Evento</h5>
+                <p><strong>Fecha y Hora:</strong> {{ event.tiempo|date:"l, d de F de Y, H:i" }}</p>
+                <p><strong>Lugar:</strong> {{ event.lugar }}</p>
+                <p><strong>Valor:</strong> {{ event.get_valor_clp }}</p>
+                <p><strong>Plazas Disponibles:</strong> {{ event.plazas_disponibles }} de {{ event.plazas_totales }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card bg-light shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Acciones</h5>
+                {% if user.is_authenticated %}
+                    {% if is_registered %}
+                        <p class="text-success">¡Ya estás inscrito en este evento! Puedes gestionarlo en <a href="{% url 'my_events' %}">Mis Eventos</a>.</p>
+                    {% else %}
+                        {% if event.plazas_disponibles > 0 %}
+                            <a href="{% url 'register_event' event.pk %}" class="btn btn-success w-100">
+                                <i class="bi bi-person-check-fill"></i> Inscribirse Ahora
+                            </a>
+                        {% else %}
+                            <p class="text-danger">Plazas agotadas.</p>
+                        {% endif %}
+                    {% endif %}
+                {% else %}
+                    <p class="text-muted">Debes iniciar sesión para inscribirte.</p>
+                    <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-outline-primary w-100 mb-2">Iniciar Sesión</a>
+                    <a href="{% url 'signup' %}" class="btn btn-warning w-100">Crear Cuenta</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<a href="{% url 'event_list' %}" class="btn btn-secondary mt-3">Volver al listado</a>
+{% endblock content %}
